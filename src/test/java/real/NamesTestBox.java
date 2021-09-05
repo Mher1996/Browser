@@ -1,12 +1,13 @@
+package real;
+
 import base.BaseTest;
 import dataprovider.IndexDataProvider;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pages.Helper;
+import base.Helper;
 import pages.ImdbTop;
 import pages.MovePage;
 
@@ -28,14 +29,14 @@ public class NamesTestBox extends BaseTest {
         getDriver().get("https://www.imdb.com/chart/top/");
         moviesListPage = PageFactory.initElements(getDriver(), ImdbTop.class);
         moviesNames = moviesListPage.top250MoviesNames();
-        movieLinks = moviesListPage.grtTopMoviesLinks();
+        movieLinks = moviesListPage.getTopMoviesLinks();
         helper = new Helper();
     }
 
     @Test(testName = "NamesTest", dataProvider = "Indexes", dataProviderClass = IndexDataProvider.class)
     public void topMoviesTest(int index) {
-        WebElement movieLink = movieLinks.get(index);
-        helper.ctrlClick(getDriver(), movieLink);
+        helper.scrollIntoView(movieLinks.get(index));
+        helper.ctrlClick(getDriver(), movieLinks.get(index));
         List<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs.get(1));
         movePage = PageFactory.initElements(getDriver(), MovePage.class);

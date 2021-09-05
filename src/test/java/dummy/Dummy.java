@@ -1,3 +1,5 @@
+package dummy;
+
 import base.BaseTest;
 import dataprovider.IndexDataProvider;
 import org.testng.annotations.*;

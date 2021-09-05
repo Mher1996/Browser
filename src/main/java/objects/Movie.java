@@ -2,12 +2,12 @@ package objects;
 
 import java.util.Objects;
 
-public class MovieObject {
+public class Movie {
     private final String movieName;
     private final Double movieRating;
     private final Integer movieProductionYear;
 
-    public MovieObject(String movieName, Double movieRating, Integer movieProductionYear) {
+    public Movie(String movieName, Double movieRating, Integer movieProductionYear) {
         this.movieName = movieName;
         this.movieRating = movieRating;
         this.movieProductionYear = movieProductionYear;
@@ -29,7 +29,7 @@ public class MovieObject {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MovieObject that = (MovieObject) o;
+        Movie that = (Movie) o;
         return Objects.equals(movieName, that.movieName) && Objects.equals(movieRating, that.movieRating)
                 && Objects.equals(movieProductionYear, that.movieProductionYear);
     }

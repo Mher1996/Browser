@@ -1,8 +1,8 @@
 package pages;
 
+import objects.Movie;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +12,17 @@ import java.util.Map;
 public class ImdbTop {
     @FindBy(css = "[class='lister-list'] tr")
     private List<WebElement> top250Films;
-
+    @FindBy(css = "[class='titleColumn'] a")
+    private List<WebElement> moviesListCheckable;
     @FindBy(css = "[class='ratingColumn imdbRating']")
     private List<WebElement> top250FilmsRatings;
 
+    private List<Movie> movies;
+
+
+        public List<WebElement> getTopMoviesLinks(){
+        return moviesListCheckable;
+        }
 
     public List<String> top250MoviesNames() {
         List<String> moviesNames = new ArrayList<>();
@@ -54,6 +61,18 @@ public class ImdbTop {
         }
         return years;
     }
+        public List<Movie> getMovieObjects(){
+            List<String> moviesNames=top250MoviesNames();
+            List<Double> moviesRatings=movieRatings();
+            List<Integer>moviesProductionYears=movieProductionYears();
+            movies =new ArrayList<>();
+            for (int i = 0; i < moviesNames.size(); i++) {
+                movies.add(new Movie(moviesNames.get(i),
+                        moviesRatings.get(i),moviesProductionYears.get(i)));
+
+            }
+            return movies;
+        }
 
 
 }
